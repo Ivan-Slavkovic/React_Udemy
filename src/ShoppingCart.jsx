@@ -2,23 +2,23 @@ import React, { Component } from "react";
 import Product from "./Product";
 export default class ShoppingCart extends Component {
   constructor(props) {
-    console.log("constructor -Shopping-Cart");
+    // console.log("constructor -Shopping-Cart");
     //initialization of the state
     super(props); //calling super class's constructor
     this.state = {
       products: [
         { id: 1, productName: "iPhone", price: 8900, quantity: 0 },
-        // { id: 2, productName: "Samsung", price: 4500, quantity: 0 },
-        // { id: 3, productName: "Sony", price: 7745, quantity: 0 },
-        // { id: 4, productName: "iPad", price: 1400, quantity: 0 },
-        // { id: 5, productName: "Xbox", price: 7780, quantity: 0 },
-        // { id: 6, productName: "Xaomi", price: 5400, quantity: 0 },
+        { id: 2, productName: "Samsung", price: 4500, quantity: 0 },
+        { id: 3, productName: "Sony", price: 7745, quantity: 0 },
+        { id: 4, productName: "iPad", price: 1400, quantity: 0 },
+        { id: 5, productName: "Xbox", price: 7780, quantity: 0 },
+        { id: 6, productName: "Xaomi", price: 5400, quantity: 0 },
       ],
     };
   }
 
   render() {
-    console.log("render -Shopping-Cart");
+    // console.log("render -Shopping-Cart");
 
     return (
       <div className="container-fluid">
@@ -44,17 +44,17 @@ export default class ShoppingCart extends Component {
 
   //executes after construct and render method and here http requiests are executed
   componentDidMount() {
-    console.log("componentDidMount -Shopping-Cart");
+    // console.log("componentDidMount -Shopping-Cart");
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(
-      "componentDidUpdate -ShoppingCart",
-      prevProps,
-      prevState,
-      this.props,
-      this.state
-    );
+    // console.log(
+    //   "componentDidUpdate -ShoppingCart",
+    //   prevProps,
+    //   prevState,
+    //   this.props,
+    //   this.state
+    // );
     // if (prevProps.x === this.props.x) {
     //   //always make https with some condition becase componentDidUpdate
     //   //will run on every click/action
@@ -62,13 +62,12 @@ export default class ShoppingCart extends Component {
   }
   //Executes when the current instance of current component is being deleted from memory
   componentWillUnmount() {
-    console.log("componentWillUnmount -ShoppingCart");
+    // console.log("componentWillUnmount -ShoppingCart");
   }
 
   componentDidCatch(error, info) {
     // console.log("componentDidCatch - ShoppingCart");
     // console.log(error, info);
-
     localStorage.lastError = `${error}\n${JSON.stringify(info)}`;
   }
 
