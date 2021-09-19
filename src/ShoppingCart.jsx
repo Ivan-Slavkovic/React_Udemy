@@ -6,14 +6,7 @@ export default class ShoppingCart extends Component {
     //initialization of the state
     super(props); //calling super class's constructor
     this.state = {
-      products: [
-        { id: 1, productName: "iPhone", price: 8900, quantity: 0 },
-        { id: 2, productName: "Samsung", price: 4500, quantity: 0 },
-        { id: 3, productName: "Sony", price: 7745, quantity: 0 },
-        { id: 4, productName: "iPad", price: 1400, quantity: 0 },
-        { id: 5, productName: "Xbox", price: 7780, quantity: 0 },
-        { id: 6, productName: "Xaomi", price: 5400, quantity: 0 },
-      ],
+      products: [],
     };
   }
 
@@ -45,6 +38,16 @@ export default class ShoppingCart extends Component {
   //executes after construct and render method and here http requiests are executed
   componentDidMount() {
     // console.log("componentDidMount -Shopping-Cart");
+    var promise = fetch("http://localhost:5000/products");
+    promise.then((response) => {
+      // console.log(response);
+
+      var promise2 = response.json();
+      promise2.then((prods) => {
+        // console.log(prods);
+        this.setState({ products: prods });
+      });
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
