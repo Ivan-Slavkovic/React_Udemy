@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+// import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 class NavBar extends Component {
   render() {
@@ -23,11 +25,59 @@ class NavBar extends Component {
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <a className="nav-link" href="/#">
-                  Home
-                </a>
-              </li>
+              {!this.props.isLoggedIn ? (
+                <li className="nav-item">
+                  <NavLink
+                    className="nav-link"
+                    to="/"
+                    activeClassName="active"
+                    exact={true}
+                  >
+                    Login
+                  </NavLink>
+                </li>
+              ) : (
+                ""
+              )}
+              {this.props.isLoggedIn ? (
+                <li className="nav-item">
+                  <NavLink
+                    className="nav-link"
+                    to="/dashboard"
+                    activeClassName="active"
+                  >
+                    Dashboard
+                  </NavLink>
+                </li>
+              ) : (
+                ""
+              )}
+              {this.props.isLoggedIn ? (
+                <li className="nav-item">
+                  <NavLink
+                    className="nav-link"
+                    to="/customers"
+                    activeClassName="active"
+                  >
+                    Customers
+                  </NavLink>
+                </li>
+              ) : (
+                ""
+              )}
+              {this.props.isLoggedIn ? (
+                <li className="nav-item">
+                  <NavLink
+                    className="nav-link"
+                    to="/cart"
+                    activeClassName="active"
+                  >
+                    ShoppingCart
+                  </NavLink>
+                </li>
+              ) : (
+                ""
+              )}
             </ul>
           </div>
         </nav>

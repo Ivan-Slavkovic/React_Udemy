@@ -16,3 +16,6 @@
 .hand-icon {
   cursor: pointer;
 }
+.nav-link.active {
+  border-bottom: 2px solid white;
+}

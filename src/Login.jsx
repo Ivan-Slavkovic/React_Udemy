@@ -1,4 +1,4 @@
-import { event } from "jquery";
+// import { event } from "jquery";
 import React, { Component } from "react";
 
 export default class Login extends Component {
@@ -9,7 +9,7 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div className="col-lg-9">
+      <div>
         <h4 className="m-1 p-2 border-bottom">Login</h4>
 
         {/* Email starts */}
@@ -55,14 +55,19 @@ export default class Login extends Component {
     var body = await response.json();
     if (body.lenght > 0) {
       //success
+      //update the message property of state of current component
       this.setState({
         message: <span className="text-success">"Successfully Logged-In"</span>,
       });
+
+      //call the AppComponent's updateIsLoggedInStatus method
+      this.props.updateIsLoggedInStatus(true);
     } else {
       //error
       this.setState({
         message: <span className="text-danger">"Invalid login Logged-In"</span>,
       });
+      this.props.updateIsLoggedInStatus(false);
     }
   };
 }
