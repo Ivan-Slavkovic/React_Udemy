@@ -36,19 +36,12 @@ export default class ShoppingCart extends Component {
   } //end of render
 
   //executes after construct and render method and here http requiests are executed
-  componentDidMount() {
-    // console.log("componentDidMount -Shopping-Cart");
-    var promise = fetch("http://localhost:5000/products");
-    promise.then((response) => {
-      // console.log(response);
-
-      var promise2 = response.json();
-      promise2.then((prods) => {
-        // console.log(prods);
-        this.setState({ products: prods });
-      });
-    });
-  }
+  componentDidMount = async () => {
+    var response = await fetch("http://localhost:5000/products");
+    var prods = await response.json();
+    console.log(prods);
+    this.setState({ products: prods });
+  };
 
   componentDidUpdate(prevProps, prevState) {
     // console.log(

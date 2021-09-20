@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-// import Login from "./Login";
-import ShoppingCart from "./ShoppingCart";
+import Login from "./Login";
+// import ShoppingCart from "./ShoppingCart";
 import NavBar from "./NavBar";
 // import ShoppingCart from "./ShoppingCart";
 export default class App extends Component {
@@ -8,10 +8,12 @@ export default class App extends Component {
     return (
       <React.Fragment>
         <NavBar />
-        <ShoppingCart></ShoppingCart>
+        <Login></Login>
       </React.Fragment>
     );
   }
 }
 
-//End of Chapter 6
+//End of Chapter 7
+
+//json-server react-db.json --watch --port=500
