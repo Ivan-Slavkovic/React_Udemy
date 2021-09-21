@@ -1,5 +1,6 @@
 // import { event } from "jquery";
 import React, { Component } from "react";
+import history from "./history";
 
 export default class Login extends Component {
   constructor(props) {
@@ -53,15 +54,19 @@ export default class Login extends Component {
       `http://localhost:500/users?email=${this.state.email}&password=${this.state.password}`
     );
     var body = await response.json();
-    if (body.lenght > 0) {
+    console.log(body);
+    if (body.length > 0) {
       //success
       //update the message property of state of current component
       this.setState({
         message: <span className="text-success">"Successfully Logged-In"</span>,
       });
+      // console.log(this.state.message);
 
       //call the AppComponent's updateIsLoggedInStatus method
       this.props.updateIsLoggedInStatus(true);
+      //navigate to dashboard
+      history.replace("/dashboard");
     } else {
       //error
       this.setState({

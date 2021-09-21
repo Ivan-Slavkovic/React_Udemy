@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 // import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import history from "./history";
 
 class NavBar extends Component {
   render() {
@@ -78,12 +79,32 @@ class NavBar extends Component {
               ) : (
                 ""
               )}
+              {this.props.isLoggedIn ? (
+                <li className="nav-item">
+                  <a
+                    className="nav-link"
+                    href="/#"
+                    activeClassName="active"
+                    onClick={this.onLogoutClick}
+                  >
+                    Logout
+                  </a>
+                </li>
+              ) : (
+                ""
+              )}
             </ul>
           </div>
         </nav>
       </React.Fragment>
     );
   }
+  onLogoutClick = (event) => {
+    event.preventDefault();
+    this.props.updateIsLoggedInStatus(false);
+    //navigate to login component
+    history.replace("/");
+  };
 }
 
 export default NavBar;

@@ -5,8 +5,10 @@ import NavBar from "./NavBar";
 import ShoppingCart from "./ShoppingCart";
 import CustomersList from "./CustomersList";
 import { Route, Switch } from "react-router";
-import { BrowserRouter } from "react-router-dom";
+import { Router } from "react-router-dom";
 import NoMatchPage from "./NoMatchPage";
+import history from "./history";
+import SideBar from "./SideBar";
 
 export default class App extends Component {
   constructor(props) {
@@ -16,27 +18,37 @@ export default class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
-        <NavBar isLoggedIn={this.state.isLoggedIn} />
+      <Router history={history}>
+        <NavBar
+          isLoggedIn={this.state.isLoggedIn}
+          updateIsLoggedInStatus={this.updateIsLoggedInStatus}
+        />
         <div className="container-fluid">
-          <Switch>
-            <Route
-              path="/"
-              exact
-              render={(props) => (
-                <Login
-                  {...props}
-                  updateIsLoggedInStatus={this.updateIsLoggedInStatus}
+          <div className="row">
+            <div className="col-lg-3">
+              {this.state.isLoggedIn ? <SideBar></SideBar> : ""}
+            </div>
+            <div className="col-lg-9">
+              <Switch>
+                <Route
+                  path="/"
+                  exact
+                  render={(props) => (
+                    <Login
+                      {...props}
+                      updateIsLoggedInStatus={this.updateIsLoggedInStatus}
+                    />
+                  )}
                 />
-              )}
-            />
-            <Route path="/dashboard" exact component={Dashboard} />
-            <Route path="/customers" exact component={CustomersList} />
-            <Route path="/cart" exact component={ShoppingCart} />
-            <Route path="*" exact component={NoMatchPage} />
-          </Switch>
+                <Route path="/dashboard" exact component={Dashboard} />
+                <Route path="/customers" exact component={CustomersList} />
+                <Route path="/cart" exact component={ShoppingCart} />
+                <Route path="*" exact component={NoMatchPage} />
+              </Switch>
+            </div>
+          </div>
         </div>
-      </BrowserRouter>
+      </Router>
     );
   }
 
