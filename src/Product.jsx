@@ -1,22 +1,29 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export default class Product extends Component {
   constructor(props) {
     super(props);
+
+    //console.log("Constructor - Product");
+
     this.state = {
       product: this.props.product,
     };
   }
 
   render() {
-    console.log("render-Product");
+    //console.log(this.props);
+
+    //console.log("render - Product");
 
     return (
       <div className="col-lg-6">
-        <div class="card m-2 ">
-          <div class="card-body">
+        <div className="card m-2">
+          <div className="card-body">
             <div className="text-muted">
-              #{this.state.product.id}
+              # {this.state.product.id}
+              {/* delete button starts */}
               <span
                 className="pull-right hand-icon"
                 onClick={() => {
@@ -25,55 +32,66 @@ export default class Product extends Component {
               >
                 <i className="fa fa-times"></i>
               </span>
+              {/* delete button ends */}
             </div>
+
             <h5 className="pt-2 border-top">
               {this.state.product.productName}
             </h5>
-            <div>${this.state.product.price}</div>
+
+            <div>$ {this.state.product.price}</div>
           </div>
+          {/* card body ends here */}
 
-          {/*  card body ends here*/}
+          <div className="card-footer">
+            <div className="float-left">
+              <span className="badge">{this.state.product.quantity}</span>
 
-          <div className="card-footer">{this.props.children}</div>
-          <div className="float-left">
-            <span className="badge">{this.state.product.quantity}</span>
-            <div className="btn-group">
-              <div
-                className="btn btn-outline-success"
-                onClick={() => {
-                  this.props.onIncrement(this.state.product, 10);
-                }}
-              >
-                +
-              </div>
-              <div
-                className="btn btn-outline-success"
-                onClick={() => {
-                  this.props.onDecrement(this.state.product, 0);
-                }}
-              >
-                -
+              <div className="btn-group">
+                <button
+                  className="btn btn-outline-success"
+                  onClick={() => {
+                    this.props.onIncrement(this.state.product, 10);
+                  }}
+                >
+                  +
+                </button>
+
+                <button
+                  className="btn btn-outline-success"
+                  onClick={() => {
+                    this.props.onDecrement(this.state.product, 0);
+                  }}
+                >
+                  -
+                </button>
               </div>
             </div>
+            {/* float-left ends here */}
+
+            <div className="float-right">
+              <Link to={`product/${this.state.product.id}`} className="mr-2">
+                Details
+              </Link>
+              {this.props.children}
+            </div>
           </div>
-
-          {/*float-left ends here */}
-
-          {/*   <div className="float-right">{this.props.children}</div>*/}
+          {/* card-footer ends here */}
         </div>
       </div>
     );
   }
+
   componentDidMount() {
-    console.log("componentDidMount-Product");
+    //console.log("componentDidMount - Product");
   }
 
   componentDidUpdate() {
-    console.log("componentDidUpdate-Product");
+    //console.log("componentDidUpdate - Product");
   }
 
   //Executes when the current instance of current component is being deleted from memory
-  componentDidUnmount() {
-    console.log("componentWillUnmount -Product");
+  componentWillUnmount() {
+    //console.log("componentWillUnmount - Product");
   }
 }

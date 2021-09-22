@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import history from "./history";
+// import history from "./history";
 
 class NavBar extends Component {
   render() {
@@ -29,8 +28,8 @@ class NavBar extends Component {
               {!this.props.isLoggedIn ? (
                 <li className="nav-item">
                   <NavLink
-                    className="nav-link"
                     to="/"
+                    className="nav-link"
                     activeClassName="active"
                     exact={true}
                   >
@@ -40,11 +39,12 @@ class NavBar extends Component {
               ) : (
                 ""
               )}
+
               {this.props.isLoggedIn ? (
                 <li className="nav-item">
                   <NavLink
-                    className="nav-link"
                     to="/dashboard"
+                    className="nav-link"
                     activeClassName="active"
                   >
                     Dashboard
@@ -53,11 +53,12 @@ class NavBar extends Component {
               ) : (
                 ""
               )}
+
               {this.props.isLoggedIn ? (
                 <li className="nav-item">
                   <NavLink
-                    className="nav-link"
                     to="/customers"
+                    className="nav-link"
                     activeClassName="active"
                   >
                     Customers
@@ -66,25 +67,26 @@ class NavBar extends Component {
               ) : (
                 ""
               )}
+
               {this.props.isLoggedIn ? (
                 <li className="nav-item">
                   <NavLink
-                    className="nav-link"
                     to="/cart"
+                    className="nav-link"
                     activeClassName="active"
                   >
-                    ShoppingCart
+                    Shopping Cart
                   </NavLink>
                 </li>
               ) : (
                 ""
               )}
+
               {this.props.isLoggedIn ? (
                 <li className="nav-item">
                   <a
-                    className="nav-link"
                     href="/#"
-                    activeClassName="active"
+                    className="nav-link"
                     onClick={this.onLogoutClick}
                   >
                     Logout
@@ -99,11 +101,16 @@ class NavBar extends Component {
       </React.Fragment>
     );
   }
+
+  //Executes when the user clicks on the Logout link
   onLogoutClick = (event) => {
+    //prevent the page refresh when the user clicks on Logout link
     event.preventDefault();
+
+    //update isLoggedInStatus as false
     this.props.updateIsLoggedInStatus(false);
-    //navigate to login component
-    history.replace("/");
+    //navigate login component
+    document.location.hash = "/";
   };
 }
 

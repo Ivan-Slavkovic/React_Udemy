@@ -73,6 +73,10 @@ export default class CustomersList extends Component {
     );
   }
 
+  componentDidMount() {
+    document.title = "Customers - eCommerce";
+  }
+
   //Executes when the user clicks on Refresh button
   onRefreshClick = () => {
     this.setState({
