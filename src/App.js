@@ -9,6 +9,7 @@ import { HashRouter } from "react-router-dom";
 import NoMatchPage from "./NoMatchPage";
 import SideBar from "./SideBar";
 import ProductByID from "./ProductByID";
+import NewCustomer from "./InsertCustomer";
 
 export default class App extends Component {
   constructor(props) {
@@ -46,6 +47,7 @@ export default class App extends Component {
                 <Route path="/customers" exact component={CustomersList} />
                 <Route path="/cart" exact component={ShoppingCart} />
                 <Route path="/product/:id" component={ProductByID} />
+                <Route path="/new-customer" exact component={NewCustomer} />
                 <Route path="*" component={NoMatchPage} />
               </Switch>
             </div>
@@ -60,4 +62,4 @@ export default class App extends Component {
     this.setState({ isLoggedIn: status });
   };
 }
-// End of Chapter 8 part 11
+// end of chapter 9 part 2

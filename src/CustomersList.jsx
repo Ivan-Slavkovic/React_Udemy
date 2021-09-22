@@ -1,47 +1,15 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export default class CustomersList extends Component {
-  state = {
-    pageTitle: "Customers",
-    customersCount: 5,
-    customers: [
-      {
-        id: 1,
-        name: "Scott",
-        phone: "123-345",
-        address: { city: "New Delhi" },
-        photo: "https://picsum.photos/id/1010/60",
-      },
-      {
-        id: 2,
-        name: "Yes",
-        phone: "123-235",
-        address: { city: "New Jersy" },
-        photo: "https://picsum.photos/id/1011/60",
-      },
-      {
-        id: 3,
-        name: "No",
-        phone: "1222-34545",
-        address: { city: "New London" },
-        photo: "https://picsum.photos/id/1012/60",
-      },
-      {
-        id: 4,
-        name: "Maybe",
-        phone: null,
-        address: { city: "Berlin" },
-        photo: "https://picsum.photos/id/1013/60",
-      },
-      {
-        id: 5,
-        name: "Mhmm",
-        phone: null,
-        address: { city: "New York" },
-        photo: "https://picsum.photos/id/1014/60",
-      },
-    ],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      pageTitle: "Customers",
+      customersCount: 5,
+      customers: [],
+    };
+  }
 
   render() {
     return (
@@ -53,10 +21,11 @@ export default class CustomersList extends Component {
             {this.state.customersCount}
           </span>
 
-          <button className="btn btn-info" onClick={this.onRefreshClick}>
-            Refresh
-          </button>
+          <Link to="/new-customer" className="btn btn-primary">
+            New Customer
+          </Link>
         </h4>
+
         <table className="table">
           <thead>
             <tr>
@@ -73,19 +42,23 @@ export default class CustomersList extends Component {
     );
   }
 
-  componentDidMount() {
+  componentDidMount = async () => {
     document.title = "Customers - eCommerce";
-  }
 
-  //Executes when the user clicks on Refresh button
-  onRefreshClick = () => {
-    this.setState({
-      customersCount: 7,
+    //'get' request('/customers')
+
+    let response = await fetch("http://localhost:5000/customers", {
+      method: "GET",
     });
+    let body = await response.json();
+    this.setState({ customers: body });
   };
+
   getPhoneToRender = (phone) => {
     if (phone) return phone;
-    else return <div className="bg-warning p-2 text-center">No phone</div>;
+    else {
+      return <div className="bg-warning p-2 text-center">No Phone</div>;
+    }
   };
 
   getCustomerRow = () => {
@@ -113,11 +86,18 @@ export default class CustomersList extends Component {
       );
     });
   };
+
+  //Executes when the user clicks on "Change Picture" button in the grid
+  //Receives the "customer" object and index of the currently clicked customer
   onChangePictureClick = (cust, index) => {
-    // console.log(cust);
-    // console.log(index);
+    //console.log(cust);
+    //console.log(index);
+
+    //get existing customers
     var custArr = this.state.customers;
     custArr[index].photo = "https://picsum.photos/id/104/60";
+
+    //update "customers" array in the state
     this.setState({ customers: custArr });
   };
 }
