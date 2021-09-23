@@ -10,6 +10,7 @@ import NoMatchPage from "./NoMatchPage";
 import SideBar from "./SideBar";
 import ProductByID from "./ProductByID";
 import NewCustomer from "./InsertCustomer";
+import UpdateCustomer from "./UpdateCustomer";
 
 export default class App extends Component {
   constructor(props) {
@@ -48,6 +49,12 @@ export default class App extends Component {
                 <Route path="/cart" exact component={ShoppingCart} />
                 <Route path="/product/:id" component={ProductByID} />
                 <Route path="/new-customer" exact component={NewCustomer} />
+                <Route
+                  path="/edit-customer/:id"
+                  exact
+                  component={UpdateCustomer}
+                />
+
                 <Route path="*" component={NoMatchPage} />
               </Switch>
             </div>

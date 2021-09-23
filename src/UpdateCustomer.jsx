@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class NewCustomer extends Component {
+class UpdateCustomer extends Component {
   constructor(props) {
     super(props);
 
@@ -12,7 +12,7 @@ class NewCustomer extends Component {
       <div className="row">
         <div className="col-lg-6 mx-auto">
           <form>
-            <h4 className="p-2 border-bottom">New Customer</h4>
+            <h4 className="p-2 border-bottom">Edit Customer</h4>
 
             {/* customer name starts */}
             <div class="form-group form-row">
@@ -88,9 +88,24 @@ class NewCustomer extends Component {
       </div>
     );
   }
+  componentDidMount = async () => {
+    //getching data based on id
+    var id = this.props.match.params.id;
+    var response = await fetch(`http://localhost:5000/customers/${id}`, {
+      method: "GET",
+    });
+    let body = await response.json();
 
+    this.setState({
+      name: body.name,
+      adress: { city: body.city },
+      phone: body.phone,
+      photo: body.photo,
+    });
+  };
   onSaveClick = async (event) => {
     event.preventDefault();
+    var id = this.props.match.params.id;
 
     var custmomer = {
       name: this.state.name,
@@ -100,8 +115,8 @@ class NewCustomer extends Component {
     };
 
     //make post request
-    var response = await fetch("http://localhost:5000/customers", {
-      method: "POST",
+    var response = await fetch(`http://localhost:5000/customers/${id}`, {
+      method: "PUT",
       body: JSON.stringify(custmomer),
       headers: {
         "Content-type": "application/json",
@@ -118,4 +133,4 @@ class NewCustomer extends Component {
   };
 }
 
-export default NewCustomer;
+export default UpdateCustomer;
