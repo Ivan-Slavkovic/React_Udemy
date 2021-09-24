@@ -58,7 +58,7 @@ export default class Login extends Component {
 
   //Executes when the user clicks on Login
   onLoginClick = async () => {
-    console.log(this.state);
+    // console.log(this.state);
 
     var response = await fetch(
       `http://localhost:5000/users?email=${this.state.email}&password=${this.state.password}`,
@@ -66,7 +66,7 @@ export default class Login extends Component {
     );
 
     var body = await response.json();
-    console.log(body);
+    // console.log(body);
 
     if (body.length > 0) {
       //success

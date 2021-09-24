@@ -40,6 +40,21 @@ class NavBar extends Component {
                 ""
               )}
 
+              {!this.props.isLoggedIn ? (
+                <li className="nav-item">
+                  <NavLink
+                    to="/register"
+                    className="nav-link"
+                    activeClassName="active"
+                    exact={true}
+                  >
+                    Register
+                  </NavLink>
+                </li>
+              ) : (
+                ""
+              )}
+
               {this.props.isLoggedIn ? (
                 <li className="nav-item">
                   <NavLink

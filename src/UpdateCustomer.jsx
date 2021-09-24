@@ -124,7 +124,7 @@ class UpdateCustomer extends Component {
     });
 
     var body = await response.json();
-    console.log(body);
+    // console.log(body);
 
     //after receiving response body, redirect to /customers
     if (body) {
