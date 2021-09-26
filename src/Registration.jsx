@@ -35,8 +35,7 @@ class Register extends Component {
                 className="form-control"
                 value={this.state.email}
                 onChange={(event) => {
-                  this.setState({ email: event.target.value });
-                  this.validate();
+                  this.setState({ email: event.target.value }, this.validate);
                 }}
               />
             </div>
@@ -55,8 +54,10 @@ class Register extends Component {
                 className="form-control"
                 value={this.state.email}
                 onChange={(event) => {
-                  this.setState({ password: event.target.value });
-                  this.validate();
+                  this.setState(
+                    { password: event.target.value },
+                    this.validate
+                  );
                 }}
               />
             </div>
@@ -75,8 +76,7 @@ class Register extends Component {
                 className="form-control"
                 value={this.state.email}
                 onChange={(event) => {
-                  this.setState({ email: event.target.value });
-                  this.validate();
+                  this.setState({ email: event.target.value }, this.validate);
                 }}
               />
             </div>
@@ -95,8 +95,7 @@ class Register extends Component {
                 className="form-control"
                 value={this.state.email}
                 onChange={(event) => {
-                  this.setState({ email: event.target.value });
-                  this.validate();
+                  this.setState({ email: event.target.value }, this.validate);
                 }}
               />
             </div>
@@ -114,29 +113,34 @@ class Register extends Component {
               </div>
               <ul className="text-danger">
                 {Object.keys(this.state.errors).map((control) => {
-                  return <li>{control}</li>;
+                  return this.state.errors[control].map((err) => {
+                    return <li key={err}>{err}</li>;
+                  });
                 })}
               </ul>
+              <div>{JSON.stringify(this.state.errors)}</div>
+              {/*Errors*/}
             </div>
           </div>
         </div>
       </div>
     );
   } //end of render
+
   validate = () => {
     //eading each control from "controls" array
     let errors = {};
     const validEmailRegex = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w([-.]\w+)*/;
     this.state.controls.forEach((control) => {
+      errors[control] = [];
       switch (control) {
         case "email":
           //email can't be blank
           if (!this.state[control]) {
             errors = [control].push("Email cannot be blank ");
           }
-
           //checking email reg exp
-          if (!this.state.email) {
+          if (this.state.email) {
             if (!validEmailRegex.test(this.state[control])) {
               errors = [control].push("Proper email address is expected");
             }
