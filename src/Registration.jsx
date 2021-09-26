@@ -15,6 +15,7 @@ class Register extends Component {
         fullName: [],
         dateOfBirth: [],
       },
+      message: "",
     };
   }
 
@@ -103,6 +104,7 @@ class Register extends Component {
           {/*dateofBirth ends*/}
           <div className="row">
             <div className="col-lg-12">
+              <div className="text-right">{this.state.message}</div>
               <div className="text-right">
                 <button
                   className="btn btn-success m-2"
@@ -174,15 +176,38 @@ class Register extends Component {
           if (!this.state[control]) {
             errors = [control].push("Date of birth cannot be blank ");
           }
-          let dob = new Date(this.state[control].getTime());
-          let today = new Date();
+          if (this.state[control]) {
+            let dob = new Date(this.state[control].getTime());
+            let today = new Date().getTime();
 
+            if (today - 18 * 365.25 * 24 * 60 * 1000 < dob) {
+              errors = [control].push("Minimum age is 18 years");
+            }
+          }
           break;
         default:
           break;
       }
     });
     this.setState({ errors });
+  };
+  isValid = () => {
+    let valid = true;
+    for (let control in this.state.errors) {
+      if (this.state.errors[control].length > 0) {
+        valid = false;
+      }
+    }
+    return valid;
+  };
+  onRegisterClick = () => {
+    this.validate();
+    if (this.isValid) {
+      this.setState({ message: "Valid" });
+    } else {
+      this.setState({ message: "Valid" });
+      this.setState({ message: "Invalid" });
+    }
   };
 }
 export default Register;
