@@ -118,8 +118,8 @@ class Register extends Component {
                   });
                 })}
               </ul>
-              <div>{JSON.stringify(this.state.errors)}</div>
               {/*Errors*/}
+              <div>{JSON.stringify(this.state.errors)}</div>
             </div>
           </div>
         </div>
@@ -131,6 +131,7 @@ class Register extends Component {
     //eading each control from "controls" array
     let errors = {};
     const validEmailRegex = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w([-.]\w+)*/;
+    const validPasswordRegex = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15})/;
     this.state.controls.forEach((control) => {
       errors[control] = [];
       switch (control) {
@@ -147,6 +148,36 @@ class Register extends Component {
           }
           break;
 
+        case "password":
+          //password cannot be blank
+          if (!this.state[control]) {
+            errors = [control].push("Password cannot be blank ");
+          }
+          if (this.state.email) {
+            if (!validPasswordRegex.test(this.state[control])) {
+              errors = [control].push(
+                "Password should be 6 to 15 characters one upper,one lower and one digit"
+              );
+            }
+          }
+          break;
+
+        case "fullName":
+          //fullName can't be black
+          if (!this.state[control]) {
+            errors = [control].push("Full Name cannot be blank ");
+          }
+          break;
+
+        case "dateOfBirth":
+          //dateOfBirth can't be black
+          if (!this.state[control]) {
+            errors = [control].push("Date of birth cannot be blank ");
+          }
+          let dob = new Date(this.state[control].getTime());
+          let today = new Date();
+
+          break;
         default:
           break;
       }
