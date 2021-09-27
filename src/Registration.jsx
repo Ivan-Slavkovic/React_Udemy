@@ -8,14 +8,23 @@ class Register extends Component {
       password: "",
       fullName: "",
       dateOfBirth: "",
-      controls: ["email", "password", "fullName", "dateOfBirth"],
+      gender: "",
+      controls: ["email", "password", "fullName", "dateOfBirth", "gender"],
       errors: {
         email: [],
         password: [],
         fullName: [],
         dateOfBirth: [],
+        gender: [],
       },
       message: "",
+      dirty: {
+        email: false,
+        password: false,
+        fullName: false,
+        dateOfBirth: false,
+        gender: false,
+      },
     };
   }
 
@@ -23,8 +32,9 @@ class Register extends Component {
     return (
       <div className="row">
         <div className="col-lg-6 mx-auto">
-          <h4>Register</h4>
-          {/*Email starts*/}
+          <h1>Register</h1>
+
+          {/* email starts */}
           <div className="form-group form-row">
             <label className="col-lg-4 col-form-label" htmlFor="email">
               Email
@@ -34,74 +44,171 @@ class Register extends Component {
                 type="text"
                 id="email"
                 className="form-control"
+                autoFocus="autofocus"
                 value={this.state.email}
                 onChange={(event) => {
-                  this.setState({ email: event.target.value }, this.validate);
+                  let dirty = this.state.dirty;
+                  dirty.email = true;
+                  this.setState(
+                    { email: event.target.value, dirty: dirty },
+                    this.validate
+                  );
+                }}
+                onBlur={(event) => {
+                  let dirty = this.state.dirty;
+                  dirty.email = true;
+                  this.setState({ dirty: dirty }, this.validate);
                 }}
               />
             </div>
           </div>
-          {/*Email ends*/}
+          {/* email ends */}
 
-          {/*password starts*/}
+          {/* password starts */}
           <div className="form-group form-row">
             <label className="col-lg-4 col-form-label" htmlFor="password">
               Password
             </label>
             <div className="col-lg-8">
               <input
-                type="text"
+                type="password"
                 id="password"
                 className="form-control"
-                value={this.state.email}
+                value={this.state.password}
                 onChange={(event) => {
+                  let dirty = this.state.dirty;
+                  dirty.password = true;
+
                   this.setState(
-                    { password: event.target.value },
+                    { password: event.target.value, dirty: dirty },
                     this.validate
                   );
+                }}
+                onBlur={(event) => {
+                  let dirty = this.state.dirty;
+                  dirty.password = true;
+                  this.setState({ dirty: dirty }, this.validate);
                 }}
               />
             </div>
           </div>
-          {/*Password ends*/}
+          {/* password ends */}
 
-          {/*FullName starts*/}
+          {/* fullName starts */}
           <div className="form-group form-row">
             <label className="col-lg-4 col-form-label" htmlFor="fullName">
-              Full name
+              Full Name
             </label>
             <div className="col-lg-8">
               <input
                 type="text"
                 id="fullName"
                 className="form-control"
-                value={this.state.email}
+                value={this.state.fullName}
                 onChange={(event) => {
-                  this.setState({ email: event.target.value }, this.validate);
+                  let dirty = this.state.dirty;
+                  dirty.fullName = true;
+
+                  this.setState(
+                    { fullName: event.target.value, dirty: dirty },
+                    this.validate
+                  );
+                }}
+                onBlur={(event) => {
+                  let dirty = this.state.dirty;
+                  dirty.fullName = true;
+                  this.setState({ dirty: dirty }, this.validate);
                 }}
               />
             </div>
           </div>
-          {/*fullName ends*/}
+          {/* fullName ends */}
 
-          {/*dateOfBirth starts*/}
+          {/* dateOfBirth starts */}
           <div className="form-group form-row">
             <label className="col-lg-4 col-form-label" htmlFor="dateOfBirth">
               Date of Birth
             </label>
             <div className="col-lg-8">
               <input
-                type="text"
+                type="date"
                 id="dateOfBirth"
                 className="form-control"
-                value={this.state.email}
+                value={this.state.dateOfBirth}
                 onChange={(event) => {
-                  this.setState({ email: event.target.value }, this.validate);
+                  let dirty = this.state.dirty;
+                  dirty.dateOfBirth = true;
+
+                  this.setState(
+                    { dateOfBirth: event.target.value, dirty: dirty },
+                    this.validate
+                  );
+                }}
+                onBlur={(event) => {
+                  let dirty = this.state.dirty;
+                  dirty.dateOfBirth = true;
+                  this.setState({ dirty: dirty }, this.validate);
                 }}
               />
             </div>
           </div>
-          {/*dateofBirth ends*/}
+          {/* dateOfBirth ends */}
+
+          {/*Gender starts*/}
+          <div className="form-group form-row">
+            <label className="col-lg-4">Gender</label>
+            <div className="col-lg-8">
+              <div className="form-check">
+                <input
+                  type="radio"
+                  id="male"
+                  name="gender"
+                  className="form-check-input"
+                  value="male"
+                  check={this.state.gender === "male" ? true : false}
+                  onChange={(event) => {
+                    let dirty = this.state.dirty;
+                    dirty.gender = true;
+                    this.setState({ gender: event.target.value, dirty: dirty });
+                  }}
+                  onBlur={(event) => {
+                    let dirty = this.state.dirty;
+                    dirty.gender = true;
+                    this.setState({ dirty: dirty });
+                  }}
+                />
+                <lavel className="form-check-label" htmlFor="male">
+                  Male
+                </lavel>
+              </div>
+              <div className="form-check">
+                <input
+                  type="radio"
+                  id="female"
+                  name="gender"
+                  className="form-check-input"
+                  value="female"
+                  check={this.state.gender === "female" ? true : false}
+                  onChange={(event) => {
+                    let dirty = this.state.dirty;
+                    dirty.gender = true;
+                    this.setState({ gender: event.target.value, dirty: dirty });
+                  }}
+                  onBlur={(event) => {
+                    let dirty = this.state.dirty;
+                    dirty.gender = true;
+                    this.setState({ dirty: dirty });
+                  }}
+                />
+                <lavel className="form-check-label" htmlFor="female">
+                  Female
+                </lavel>
+              </div>
+            </div>
+          </div>
+
+          {/*Gender ends*/}
+
           <div className="row">
             <div className="col-lg-12">
               <div className="text-right">{this.state.message}</div>
@@ -113,15 +220,20 @@ class Register extends Component {
                   Register
                 </button>
               </div>
+
               <ul className="text-danger">
                 {Object.keys(this.state.errors).map((control) => {
-                  return this.state.errors[control].map((err) => {
-                    return <li key={err}>{err}</li>;
-                  });
+                  if (this.state.dirty[control]) {
+                    return this.state.errors[control].map((err) => {
+                      return <li key={err}>{err}</li>;
+                    });
+                  } else {
+                    return "";
+                  }
                 })}
               </ul>
-              {/*Errors*/}
-              <div>{JSON.stringify(this.state.errors)}</div>
+
+              <div>{JSON.stringify(this.state)}</div>
             </div>
           </div>
         </div>
@@ -130,69 +242,88 @@ class Register extends Component {
   } //end of render
 
   validate = () => {
-    //eading each control from "controls" array
-    let errors = {};
-    const validEmailRegex = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w([-.]\w+)*/;
+    const validEmailRegex = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
     const validPasswordRegex = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15})/;
+    let errors = {};
+
+    //reading each control from 'controls' array
     this.state.controls.forEach((control) => {
       errors[control] = [];
+
       switch (control) {
         case "email":
           //email can't be blank
           if (!this.state[control]) {
-            errors = [control].push("Email cannot be blank ");
+            errors[control].push("Email can't be blank");
           }
+
           //checking email reg exp
           if (this.state.email) {
             if (!validEmailRegex.test(this.state[control])) {
-              errors = [control].push("Proper email address is expected");
+              errors[control].push("Proper email address is expected");
             }
           }
           break;
 
         case "password":
-          //password cannot be blank
+          //password can't be blank
           if (!this.state[control]) {
-            errors = [control].push("Password cannot be blank ");
+            errors[control].push("Password can't be blank");
           }
-          if (this.state.email) {
+
+          //checking password reg exp
+          if (this.state.password) {
             if (!validPasswordRegex.test(this.state[control])) {
-              errors = [control].push(
-                "Password should be 6 to 15 characters one upper,one lower and one digit"
+              errors[control].push(
+                "Password should be 6 to 15 characters long with at least one uppercase letter, one lowercase letter and one digit"
               );
             }
           }
           break;
 
         case "fullName":
-          //fullName can't be black
+          //fullName can't be blank
           if (!this.state[control]) {
-            errors = [control].push("Full Name cannot be blank ");
+            errors[control].push("Full Name can't be blank");
           }
           break;
 
         case "dateOfBirth":
-          //dateOfBirth can't be black
+          //dateOfBirth can't be blank
           if (!this.state[control]) {
-            errors = [control].push("Date of birth cannot be blank ");
+            errors[control].push("Date of Birth can't be blank");
           }
-          if (this.state[control]) {
-            let dob = new Date(this.state[control].getTime());
-            let today = new Date().getTime();
 
-            if (today - 18 * 365.25 * 24 * 60 * 1000 < dob) {
-              errors = [control].push("Minimum age is 18 years");
+          //dateOfBirth should be 18 years older
+          if (this.state[control]) {
+            let dob = new Date(this.state[control]).getTime(); //no. of milliseconds since 1970-01-01
+            let today = new Date().getTime(); //no. of milliseconds since 1970-01-01
+
+            if (today - 18 * 365.25 * 24 * 60 * 60 * 1000 < dob) {
+              errors[control].push("Minimum age is 18 years");
             }
+          }
+          break;
+        case "gender":
+          //checking if gender is empty
+          if (!this.state[control]) {
+            errors[control].push("Gender cannot be blank");
           }
           break;
         default:
           break;
       }
     });
+
+    //set errors
     this.setState({ errors });
   };
+
+  //Checks state.errors property for error messages
   isValid = () => {
     let valid = true;
+
+    //reading all controls from this.state.errors
     for (let control in this.state.errors) {
       if (this.state.errors[control].length > 0) {
         valid = false;
@@ -200,14 +331,25 @@ class Register extends Component {
     }
     return valid;
   };
+
+  //Executes when the user clicks on Register button
   onRegisterClick = () => {
+    //make all dirty
+    var dirty = this.state.dirty;
+    Object.keys(dirty).forEach((control) => {
+      dirty[control] = true;
+    });
+    this.setState({ dirty: dirty });
+
+    //invoke validate method to check all control's values
     this.validate();
-    if (this.isValid) {
+
+    if (this.isValid()) {
       this.setState({ message: "Valid" });
     } else {
-      this.setState({ message: "Valid" });
       this.setState({ message: "Invalid" });
     }
   };
 }
+
 export default Register;

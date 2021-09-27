@@ -70,4 +70,4 @@ export default class App extends Component {
     this.setState({ isLoggedIn: status });
   };
 }
-// end of chapter 9 part 2
+// end of chapter 10 part 4
