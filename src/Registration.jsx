@@ -10,7 +10,7 @@ class Register extends Component {
       dateOfBirth: "",
       gender: "",
       country: "",
-      reveiceNewsLetters: false,
+      receiveNewsLetters: false,
       controls: [
         "email",
         "password",
@@ -18,7 +18,7 @@ class Register extends Component {
         "dateOfBirth",
         "gender",
         "country",
-        "reveiceNewsLetters",
+        "receiveNewsLetters",
       ],
       errors: {
         email: [],
@@ -27,7 +27,7 @@ class Register extends Component {
         dateOfBirth: [],
         gender: [],
         country: [],
-        reveiceNewsLetters: [],
+        receiveNewsLetters: [],
       },
       message: "",
       dirty: {
@@ -37,7 +37,7 @@ class Register extends Component {
         dateOfBirth: false,
         gender: false,
         country: false,
-        reveiceNewsLetters: false,
+        receiveNewsLetters: false,
       },
     };
   }
@@ -74,6 +74,12 @@ class Register extends Component {
                   this.setState({ dirty: dirty }, this.validate);
                 }}
               />
+
+              <div className="text-danger">
+                {this.state.errors.email[0] && this.state.dirty.email
+                  ? this.state.errors.email
+                  : ""}
+              </div>
             </div>
           </div>
           {/* email ends */}
@@ -104,6 +110,12 @@ class Register extends Component {
                   this.setState({ dirty: dirty }, this.validate);
                 }}
               />
+
+              <div className="text-danger">
+                {this.state.errors.password[0] && this.state.dirty.password
+                  ? this.state.errors.password
+                  : ""}
+              </div>
             </div>
           </div>
           {/* password ends */}
@@ -134,6 +146,12 @@ class Register extends Component {
                   this.setState({ dirty: dirty }, this.validate);
                 }}
               />
+
+              <div className="text-danger">
+                {this.state.errors.fullName[0] && this.state.dirty.fullName
+                  ? this.state.errors.fullName
+                  : ""}
+              </div>
             </div>
           </div>
           {/* fullName ends */}
@@ -164,11 +182,18 @@ class Register extends Component {
                   this.setState({ dirty: dirty }, this.validate);
                 }}
               />
+
+              <div className="text-danger">
+                {this.state.errors.dateOfBirth[0] &&
+                this.state.dirty.dateOfBirth
+                  ? this.state.errors.dateOfBirth
+                  : ""}
+              </div>
             </div>
           </div>
           {/* dateOfBirth ends */}
 
-          {/*Gender starts*/}
+          {/* gender starts */}
           <div className="form-group form-row">
             <label className="col-lg-4">Gender</label>
             <div className="col-lg-8">
@@ -179,7 +204,7 @@ class Register extends Component {
                   name="gender"
                   className="form-check-input"
                   value="male"
-                  check={this.state.gender === "male" ? true : false}
+                  checked={this.state.gender === "male" ? true : false}
                   onChange={(event) => {
                     let dirty = this.state.dirty;
                     dirty.gender = true;
@@ -191,18 +216,19 @@ class Register extends Component {
                     this.setState({ dirty: dirty });
                   }}
                 />
-                <lavel className="form-check-label" htmlFor="male">
+
+                <label className="form-check-label" htmlFor="male">
                   Male
-                </lavel>
+                </label>
               </div>
               <div className="form-check">
                 <input
                   type="radio"
                   id="female"
                   name="gender"
-                  className="form-check-input"
                   value="female"
-                  check={this.state.gender === "female" ? true : false}
+                  className="form-check-input"
+                  checked={this.state.gender === "female" ? true : false}
                   onChange={(event) => {
                     let dirty = this.state.dirty;
                     dirty.gender = true;
@@ -214,16 +240,22 @@ class Register extends Component {
                     this.setState({ dirty: dirty });
                   }}
                 />
-                <lavel className="form-check-label" htmlFor="female">
+
+                <label className="form-check-label" htmlFor="female">
                   Female
-                </lavel>
+                </label>
+              </div>
+
+              <div className="text-danger">
+                {this.state.errors.gender[0] && this.state.dirty.gender
+                  ? this.state.errors.gender
+                  : ""}
               </div>
             </div>
           </div>
+          {/* gender ends */}
 
-          {/*Gender ends*/}
-
-          {/*Country starts*/}
+          {/* country starts */}
           <div className="form-group form-row">
             <label className="col-lg-4 col-form-label" htmlFor="country">
               Country
@@ -247,19 +279,26 @@ class Register extends Component {
                 }}
               >
                 <option value="">Please Select</option>
-                <option value="SRB">Serbia</option>
+                <option value="India">India</option>
                 <option value="USA">USA</option>
                 <option value="UK">UK</option>
                 <option value="Japan">Japan</option>
                 <option value="France">France</option>
+                <option value="Brazil">Brazil</option>
                 <option value="Mexico">Mexico</option>
+                <option value="Canada">Canada</option>
               </select>
+
+              <div className="text-danger">
+                {this.state.errors.country[0] && this.state.dirty.country
+                  ? this.state.errors.country
+                  : ""}
+              </div>
             </div>
           </div>
+          {/* country ends */}
 
-          {/*Country ends*/}
-
-          {/*ReveiveNewsLetters start*/}
+          {/* receiveNewsLetters starts */}
           <div className="form-group form-row">
             <label className="col-lg-4"></label>
             <div className="col-lg-8">
@@ -268,13 +307,13 @@ class Register extends Component {
                   type="checkbox"
                   className="form-check-input"
                   value="true"
-                  checked={this.state.reveiceNewsLetters}
+                  checked={this.state.receiveNewsLetters}
                   onChange={(event) => {
                     let dirty = this.state.dirty;
-                    dirty.reveiceNewsLetters = true;
+                    dirty.receiveNewsLetters = true;
                     this.setState(
                       {
-                        reveiceNewsLetters: event.target.checked,
+                        receiveNewsLetters: event.target.checked,
                         dirty: dirty,
                       },
                       this.validate
@@ -282,23 +321,30 @@ class Register extends Component {
                   }}
                   onBlur={(event) => {
                     let dirty = this.state.dirty;
-                    dirty.reveiceNewsLetters = true;
+                    dirty.receiveNewsLetters = true;
                     this.setState({
                       dirty: dirty,
                     });
                   }}
                   id="receivenewsletters"
-                ></input>
+                />
                 <label
                   className="form-check-label"
                   htmlFor="receivenewsletters"
                 >
                   Receive News Letters
                 </label>
+
+                <div className="text-danger">
+                  {this.state.errors.receiveNewsLetters[0] &&
+                  this.state.dirty.receiveNewsLetters
+                    ? this.state.errors.receiveNewsLetters
+                    : ""}
+                </div>
               </div>
             </div>
           </div>
-          {/*ReveiveNewsLetters ends*/}
+          {/* receiveNewsLetters ends */}
 
           <div className="row">
             <div className="col-lg-12">
@@ -324,7 +370,7 @@ class Register extends Component {
                 })}
               </ul>
 
-              <div>{JSON.stringify(this.state)}</div>
+              {/* <div>{JSON.stringify(this.state)}</div> */}
             </div>
           </div>
         </div>
@@ -395,16 +441,19 @@ class Register extends Component {
             }
           }
           break;
+
         case "gender":
-          //checking if gender is empty
+          //gender can't be blank
           if (!this.state[control]) {
-            errors[control].push("Gender cannot be blank");
+            errors[control].push("Gender can't be blank");
           }
+
           break;
 
         case "country":
+          //country can't be blank
           if (!this.state[control]) {
-            errors[control].push("Country cannot be blank");
+            errors[control].push("Country can't be blank");
           }
           break;
 
@@ -431,7 +480,7 @@ class Register extends Component {
   };
 
   //Executes when the user clicks on Register button
-  onRegisterClick = () => {
+  onRegisterClick = async () => {
     //make all dirty
     var dirty = this.state.dirty;
     Object.keys(dirty).forEach((control) => {
@@ -443,7 +492,37 @@ class Register extends Component {
     this.validate();
 
     if (this.isValid()) {
-      this.setState({ message: "Valid" });
+      let user = {
+        email: this.state.email,
+        password: this.state.password,
+        fullName: this.state.fullName,
+        dateOfBirth: this.state.dateOfBirth,
+        gender: this.state.gender,
+        country: this.state.country,
+        receiveNewsLetters: this.state.receiveNewsLetters,
+      };
+      let response = await fetch("http://localhost:5000/users", {
+        method: "POST",
+        body: JSON.stringify(user),
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+
+      let body = await response.json();
+      if (response.ok) {
+        this.setState({
+          message: (
+            <span className="text-success">Successfully Registered</span>
+          ),
+        });
+      } else {
+        console.log(response, body);
+
+        this.setState({
+          message: <span className="text-danger">Error in registration</span>,
+        });
+      }
     } else {
       this.setState({ message: "Invalid" });
     }
