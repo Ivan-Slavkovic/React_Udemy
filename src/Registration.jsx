@@ -10,6 +10,7 @@ class Register extends Component {
       dateOfBirth: "",
       gender: "",
       country: "",
+      reveiceNewsLetters: false,
       controls: [
         "email",
         "password",
@@ -17,6 +18,7 @@ class Register extends Component {
         "dateOfBirth",
         "gender",
         "country",
+        "reveiceNewsLetters",
       ],
       errors: {
         email: [],
@@ -25,6 +27,7 @@ class Register extends Component {
         dateOfBirth: [],
         gender: [],
         country: [],
+        reveiceNewsLetters: [],
       },
       message: "",
       dirty: {
@@ -34,6 +37,7 @@ class Register extends Component {
         dateOfBirth: false,
         gender: false,
         country: false,
+        reveiceNewsLetters: false,
       },
     };
   }
@@ -254,6 +258,47 @@ class Register extends Component {
           </div>
 
           {/*Country ends*/}
+
+          {/*ReveiveNewsLetters start*/}
+          <div className="form-group form-row">
+            <label className="col-lg-4"></label>
+            <div className="col-lg-8">
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  value="true"
+                  checked={this.state.reveiceNewsLetters}
+                  onChange={(event) => {
+                    let dirty = this.state.dirty;
+                    dirty.reveiceNewsLetters = true;
+                    this.setState(
+                      {
+                        reveiceNewsLetters: event.target.checked,
+                        dirty: dirty,
+                      },
+                      this.validate
+                    );
+                  }}
+                  onBlur={(event) => {
+                    let dirty = this.state.dirty;
+                    dirty.reveiceNewsLetters = true;
+                    this.setState({
+                      dirty: dirty,
+                    });
+                  }}
+                  id="receivenewsletters"
+                ></input>
+                <label
+                  className="form-check-label"
+                  htmlFor="receivenewsletters"
+                >
+                  Receive News Letters
+                </label>
+              </div>
+            </div>
+          </div>
+          {/*ReveiveNewsLetters ends*/}
 
           <div className="row">
             <div className="col-lg-12">
